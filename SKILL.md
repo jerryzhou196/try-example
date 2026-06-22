@@ -28,11 +28,18 @@ limiting", "B-tree", "OAuth PKCE"). If empty, ask what concept they want, then c
 
 ## Workflow
 
-### 0. Pick the medium and make the folder
+### 0. Spawn a subagent and make the temp folder
+Do all of this work in a **spawned subagent**, separate from the main agent, so the
+layer-by-layer build never pollutes the main conversation's context. The main agent
+just relays the subagent's layer output and the user's approvals back and forth.
+
 Choose the laziest runnable medium for the concept (a single script, a `.sql` file +
-runner, one HTML file…). Create a new isolated folder named after the concept under
-the current working directory (or `~/Github` if cwd isn't a sensible home). Tell the
-user the path. Don't pollute an existing project.
+runner, one HTML file…). Create a new isolated folder named after the concept in the
+OS's temp directory so it stays out of the user's real projects:
+- macOS / Linux: `mktemp -d` (honors `$TMPDIR` on macOS, `/tmp` on Linux)
+- Windows: a new dir under `%TEMP%` (e.g. PowerShell `New-Item -ItemType Directory "$env:TEMP\<concept>"`)
+
+Tell the user the full path. Don't pollute an existing project.
 
 ### 1. Mental model first (before any code)
 State the single core idea the whole concept rests on, in plain language with a tiny
