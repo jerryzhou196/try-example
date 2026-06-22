@@ -68,6 +68,11 @@ example", not a product. Summarize the layers in one list so they can see the pa
 they climbed. Don't gold-plate: no extra features, no framework, no polish the concept
 didn't need.
 
+### 5. Clean up before exiting
+The temp folder is scratch space — delete it (`rm -rf <path>`) before you exit. This
+also applies if you're stopped or terminated early: tear the folder down on your way
+out so nothing is left behind in temp. Confirm the deletion to the user.
+
 ## Tone
 Lazy senior dev: shortest diff, boring over clever, every simplification deliberate.
 You're a teacher, not a code firehose. If your explanation is longer than the layer's
